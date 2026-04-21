@@ -1,0 +1,10 @@
+{
+  "verified": true,
+  "subject": "stage284",
+  "verification_url": "https://example.com/verify/stage284",
+  "details": {
+    "integrity": true,
+    "identity": true,
+    "public_verification_url": true
+  }
+}

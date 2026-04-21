@@ -1,0 +1,21 @@
+{
+  "decision": "accept",
+  "details": {
+    "identity": true,
+    "integrity": true,
+    "public_verification_url": true
+  },
+  "input": {
+    "verified": true
+  },
+  "policy": {
+    "accept_if_verified": true,
+    "name": "verified+url-required",
+    "require_verification_url": true
+  },
+  "reason": "verified=true",
+  "subject": "stage284",
+  "verification": {
+    "url": "https://example.com/verify/stage284"
+  }
+}
