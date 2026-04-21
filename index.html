@@ -6,43 +6,46 @@
   <title>QSP / VEP / Stage284</title>
   <style>
     :root{
-      --bg-top:#07101f;
+      --bg-top:#070d1a;
       --bg-bottom:#090f22;
-      --panel:rgba(17,25,53,.78);
-      --panel-strong:rgba(22,31,66,.92);
-      --line:#4c5cff88;
-      --line-soft:#6377ff44;
-      --text:#edf2ff;
-      --muted:#a7b2d9;
-      --good:#49f0b5;
-      --good-bg:rgba(73,240,181,.14);
-      --chip:#22346b;
-      --shadow:0 18px 42px rgba(0,0,0,.38);
+      --panel:rgba(16,23,49,.86);
+      --panel-2:rgba(20,29,61,.92);
+      --line:rgba(92,108,255,.46);
+      --line-soft:rgba(92,108,255,.22);
+      --text:#eef3ff;
+      --muted:#a9b5d8;
+      --good:#48f0b2;
+      --good-bg:rgba(72,240,178,.12);
+      --good-line:rgba(72,240,178,.28);
+      --chip1:#2d4386;
+      --chip2:#23376f;
+      --shadow:0 18px 44px rgba(0,0,0,.42);
       --radius:22px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
     }
 
     *{box-sizing:border-box}
 
-    body{
+    html,body{
       margin:0;
+      padding:0;
       color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",sans-serif;
       background:
-        radial-gradient(circle at 20% 0%, rgba(86,114,255,.18), transparent 24%),
-        radial-gradient(circle at 80% 10%, rgba(144,92,255,.14), transparent 22%),
+        radial-gradient(circle at 18% 0%, rgba(91,115,255,.16), transparent 24%),
+        radial-gradient(circle at 82% 12%, rgba(132,92,255,.12), transparent 22%),
         linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
       min-height:100vh;
     }
 
     .wrap{
-      max-width:1000px;
+      max-width:1020px;
       margin:0 auto;
-      padding:26px 18px 60px;
+      padding:28px 18px 56px;
     }
 
     .card{
-      background:linear-gradient(180deg, rgba(22,31,66,.82), rgba(14,20,45,.88));
+      background:linear-gradient(180deg, rgba(19,27,58,.86), rgba(13,19,42,.92));
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
@@ -50,19 +53,19 @@
     }
 
     .hero{
-      padding:26px 22px 20px;
+      padding:26px 22px 18px;
       margin-bottom:14px;
     }
 
     .eyebrow{
       font-size:13px;
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.04em;
-      color:#8fd1ff;
+      color:#8fd8ff;
       margin-bottom:10px;
     }
 
-    .hero h1{
+    h1{
       margin:0 0 10px;
       font-size:20px;
       line-height:1.2;
@@ -71,9 +74,9 @@
     .hero p{
       margin:0;
       color:var(--text);
-      opacity:.92;
       font-size:14px;
-      line-height:1.85;
+      line-height:1.9;
+      opacity:.96;
     }
 
     .grid-2{
@@ -96,8 +99,8 @@
 
     .section-title{
       font-size:13px;
-      color:#dbe6ff;
-      font-weight:700;
+      font-weight:800;
+      color:#e4ebff;
       margin-bottom:16px;
     }
 
@@ -105,29 +108,29 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:8px 16px;
+      padding:8px 15px;
       border-radius:999px;
       font-size:22px;
       font-weight:800;
       letter-spacing:.02em;
-      margin-bottom:14px;
-      color:#dffff2;
+      margin-bottom:12px;
+      color:#dffff1;
       background:var(--good-bg);
-      border:1px solid rgba(73,240,181,.36);
-      box-shadow:0 0 18px rgba(73,240,181,.12) inset;
+      border:1px solid var(--good-line);
+      box-shadow:0 0 18px rgba(72,240,178,.08) inset;
     }
 
     .decision-desc{
       font-size:14px;
+      line-height:1.8;
       color:var(--text);
-      line-height:1.75;
       margin-bottom:14px;
     }
 
     .chips{
       display:flex;
-      gap:8px;
       flex-wrap:wrap;
+      gap:8px;
     }
 
     .chip{
@@ -135,16 +138,16 @@
       align-items:center;
       padding:8px 12px;
       border-radius:999px;
-      background:linear-gradient(180deg, #314d98, #243b79);
-      border:1px solid #6f8fff55;
-      color:#dbe7ff;
+      background:linear-gradient(180deg, var(--chip1), var(--chip2));
+      border:1px solid rgba(114,145,255,.28);
+      color:#dde7ff;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
     }
 
     .link-list{
       display:grid;
-      gap:10px;
+      gap:12px;
     }
 
     .link-row .label{
@@ -154,10 +157,10 @@
     }
 
     .link-row a{
-      color:#b8e8ff;
+      color:#bce7ff;
       text-decoration:none;
       font-size:14px;
-      font-weight:700;
+      font-weight:800;
       word-break:break-all;
     }
 
@@ -187,12 +190,12 @@
     }
 
     .status-good{
-      color:#dffff2;
+      color:#eafff4;
       font-weight:800;
     }
 
     .mono-box{
-      background:rgba(17,24,51,.82);
+      background:rgba(11,17,38,.86);
       border:1px solid var(--line-soft);
       border-radius:16px;
       padding:16px 18px;
@@ -207,14 +210,14 @@
 
     .footer{
       text-align:center;
-      color:#dfe8ff;
+      color:#e0e8ff;
       font-size:12px;
       margin-top:18px;
-      opacity:.9;
+      opacity:.92;
     }
 
-    @media (max-width: 840px){
-      .grid-2, .grid-2-eq{
+    @media (max-width: 860px){
+      .grid-2,.grid-2-eq{
         grid-template-columns:1fr;
       }
     }
@@ -223,10 +226,10 @@
 <body>
   <div class="wrap">
     <section class="card hero">
-      <div class="eyebrow">QSP | VEP | STAGE284</div>
+      <div class="eyebrow">QSP / VEP / Stage284</div>
       <h1>公開検証URL</h1>
       <p>
-        Stage284は、検証結果をプロトコル上の最小判定レイヤーへ変換します。
+        Stage284は、検証結果を機械可読なプロトコル判定へ変換します。
         第三者は、判定結果だけでなく、その判定に対応する公開検証URLも確認できます。
       </p>
     </section>
@@ -240,8 +243,8 @@
         </div>
         <div class="chips">
           <span class="chip">決定論的</span>
-          <span class="chip">verification_url 必須</span>
-          <span class="chip">public verification</span>
+          <span class="chip">verified 入力</span>
+          <span class="chip">verification_url 公開済み</span>
         </div>
       </article>
 
@@ -250,13 +253,13 @@
         <div class="link-list">
           <div class="link-row">
             <div class="label">リポジトリ</div>
-            <a id="repoLink" href="https://github.com/mokkunsuzuki-code/stage284" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/mokkunsuzuki-code/stage284" target="_blank" rel="noopener noreferrer">
               https://github.com/mokkunsuzuki-code/stage284
             </a>
           </div>
           <div class="link-row">
             <div class="label">行動</div>
-            <a id="actionsLink" href="https://github.com/mokkunsuzuki-code/stage284/actions" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/mokkunsuzuki-code/stage284/actions" target="_blank" rel="noopener noreferrer">
               最新の検証実行結果
             </a>
           </div>
@@ -276,27 +279,27 @@
         <table>
           <tbody>
             <tr>
-              <th>identity</th>
-              <td id="scoreIdentity">1</td>
-            </tr>
-            <tr>
-              <th>integrity</th>
+              <th>誠実さの信頼</th>
               <td id="scoreIntegrity">1</td>
             </tr>
             <tr>
-              <th>public verification</th>
+              <th>本人確認の信頼性</th>
+              <td id="scoreIdentity">1</td>
+            </tr>
+            <tr>
+              <th>公開検証URL</th>
               <td id="scorePublicUrl">1</td>
             </tr>
             <tr>
-              <th>verified input</th>
+              <th>入力検証</th>
               <td id="scoreVerified">1</td>
             </tr>
             <tr>
-              <th>decision score</th>
+              <th>判定準備度</th>
               <td id="scoreDecision">1</td>
             </tr>
             <tr>
-              <th>total trust</th>
+              <th>トータルトラスト</th>
               <td id="scoreTotal">1.00</td>
             </tr>
           </tbody>
@@ -333,7 +336,7 @@
     </section>
 
     <section class="card section" style="margin-bottom:14px;">
-      <div class="section-title">ワンコマンド外部確認</div>
+      <div class="section-title">ワンコマンド外部検証</div>
       <div id="verifyCommand" class="mono-box">loading...</div>
     </section>
 
@@ -342,27 +345,20 @@
       <div id="decisionJsonBox" class="mono-box">loading...</div>
     </section>
 
-    <section class="card section">
-      <div class="section-title">公開鍵ではなく公開検証URL</div>
-      <div class="mono-box">Stage284 は、verified=true の表示を accept / reject の判定へ変換し、その結果を公開検証URLで第三者に提示します。</div>
-    </section>
-
     <div class="footer">MIT ライセンス · Copyright (c) 2025 鈴木基弘</div>
   </div>
 
   <script>
-    function score(v){
-      return v ? 1 : 0;
-    }
+    function score(v){ return v ? 1 : 0; }
 
     function jpDecision(decision){
       return decision === 'accept' ? '受け入れる' : '拒否する';
     }
 
-    function decisionReasonText(reason){
-      if(reason === 'verified=true') return '判定条件を満たしているため受け入れです。';
-      if(reason === 'verified=false') return 'verified が false のため拒否です。';
-      if(reason === 'missing verification_url') return '公開検証URLが無いため拒否です。';
+    function reasonText(reason){
+      if(reason === 'verified=true') return 'verified=true のため、判定条件を満たしています。';
+      if(reason === 'verified=false') return 'verified=false のため、拒否判定です。';
+      if(reason === 'missing verification_url') return '公開検証URLが無いため、拒否判定です。';
       return reason || '-';
     }
 
@@ -381,8 +377,8 @@
         const decisionOk = decision === 'accept';
 
         const scores = [
-          score(identity),
           score(integrity),
+          score(identity),
           score(publicUrl),
           score(verified),
           score(decisionOk)
@@ -397,12 +393,12 @@
           pill.style.borderColor = 'rgba(239,68,68,.36)';
         }
 
-        document.getElementById('decisionDesc').textContent = decisionReasonText(data.reason);
+        document.getElementById('decisionDesc').textContent = reasonText(data.reason);
         document.getElementById('publicLink').href = verificationUrl;
         document.getElementById('publicLink').textContent = verificationUrl;
 
-        document.getElementById('scoreIdentity').textContent = score(identity);
         document.getElementById('scoreIntegrity').textContent = score(integrity);
+        document.getElementById('scoreIdentity').textContent = score(identity);
         document.getElementById('scorePublicUrl').textContent = score(publicUrl);
         document.getElementById('scoreVerified').textContent = score(verified);
         document.getElementById('scoreDecision').textContent = score(decisionOk);
@@ -416,10 +412,12 @@
 
         const verifyCommand = [
           'curl -L https://mokkunsuzuki-code.github.io/stage284/out/decision/decision.json -o decision.json',
-          'python3 - <<\'PY\'',
+          'python3 - <<\\'PY\\'',
           'import json',
           'from pathlib import Path',
           'data = json.loads(Path("decision.json").read_text(encoding="utf-8"))',
+          'assert data["decision"] in ("accept", "reject")',
+          'assert data["verification_url"]',
           'print(json.dumps(data, ensure_ascii=False, indent=2))',
           'print("decision =", data.get("decision"))',
           'print("verification_url =", data.get("verification_url"))',
@@ -430,10 +428,11 @@
         document.getElementById('decisionJsonBox').textContent = JSON.stringify(data, null, 2);
       })
       .catch(err => {
-        document.getElementById('decisionPill').textContent = '読み込み失敗';
-        document.getElementById('decisionPill').style.color = '#ffe7eb';
-        document.getElementById('decisionPill').style.background = 'rgba(239,68,68,.14)';
-        document.getElementById('decisionPill').style.borderColor = 'rgba(239,68,68,.36)';
+        const pill = document.getElementById('decisionPill');
+        pill.textContent = '読み込み失敗';
+        pill.style.color = '#ffe7eb';
+        pill.style.background = 'rgba(239,68,68,.14)';
+        pill.style.borderColor = 'rgba(239,68,68,.36)';
         document.getElementById('decisionDesc').textContent = 'decision.json の読み込みに失敗しました: ' + err;
         document.getElementById('verifyCommand').textContent = 'Failed to load decision.json: ' + err;
         document.getElementById('decisionJsonBox').textContent = 'Failed to load decision.json: ' + err;
