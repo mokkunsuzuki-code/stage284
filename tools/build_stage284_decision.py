@@ -21,19 +21,9 @@ def write_json(path: Path, data: dict) -> None:
 
 def build_decision(status: dict) -> dict:
     verified = status.get("verified")
-    verification_url = status.get("verification_url")
 
     if not isinstance(verified, bool):
-        return {
-            "decision": "reject",
-            "reason": "invalid or missing 'verified'"
-        }
-
-    if not verification_url:
-        return {
-            "decision": "reject",
-            "reason": "missing verification_url"
-        }
+        raise ValueError("input JSON must contain boolean field: verified")
 
     decision = "accept" if verified else "reject"
     reason = "verified=true" if verified else "verified=false"
@@ -44,18 +34,18 @@ def build_decision(status: dict) -> dict:
             "verified": verified
         },
         "policy": {
-            "name": "verified+url-required",
-            "require_verification_url": True,
-            "accept_if_verified": True
+            "name": "boolean-verification-to-decision",
+            "accept_if_verified": True,
+            "reject_if_not_verified": True
         },
-        "reason": reason,
-        "verification": {
-            "url": verification_url
-        }
+        "reason": reason
     }
 
     if "subject" in status:
         result["subject"] = status["subject"]
+
+    if "verification_url" in status:
+        result["verification_url"] = status["verification_url"]
 
     if "details" in status and isinstance(status["details"], dict):
         result["details"] = status["details"]
@@ -65,17 +55,28 @@ def build_decision(status: dict) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Build Stage284 decision.json with required verification_url"
+        description="Build Stage284 decision.json from verification_status.json"
     )
-    parser.add_argument("--input", default="out/verification/verification_status.json")
-    parser.add_argument("--output", default="out/decision/decision.json")
+    parser.add_argument(
+        "--input",
+        default="out/verification/verification_status.json",
+        help="Path to verification input JSON",
+    )
+    parser.add_argument(
+        "--output",
+        default="out/decision/decision.json",
+        help="Path to output decision JSON",
+    )
     args = parser.parse_args()
 
-    status = load_json(Path(args.input))
-    decision = build_decision(status)
-    write_json(Path(args.output), decision)
+    input_path = Path(args.input)
+    output_path = Path(args.output)
 
-    print(f"[OK] wrote {args.output}")
+    status = load_json(input_path)
+    decision = build_decision(status)
+    write_json(output_path, decision)
+
+    print(f"[OK] wrote {output_path}")
     print(f"[OK] decision={decision['decision']}")
 
 

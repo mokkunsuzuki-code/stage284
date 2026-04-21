@@ -1,0 +1,39 @@
+name: stage284-decision
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  decision:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build decision
+        run: |
+          python3 tools/build_stage284_decision.py
+
+      - name: Verify decision
+        run: |
+          python3 tools/verify_stage284_decision.py
+
+      - name: Show decision
+        run: |
+          cat out/decision/decision.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: stage284-decision
+          path: |
+            out/verification/verification_status.json
+            out/decision/decision.json
