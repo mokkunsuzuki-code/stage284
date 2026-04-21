@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage284 Verification</title>
+</head>
+<body>
+  <h1>Stage284 Verification</h1>
+  <p>Decision output:</p>
+  <pre id="data">loading...</pre>
+
+  <script>
+    fetch('out/decision/decision.json')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('data').textContent =
+          JSON.stringify(d, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('data').textContent =
+          'Failed to load decision.json: ' + err;
+      });
+  </script>
+</body>
+</html>
