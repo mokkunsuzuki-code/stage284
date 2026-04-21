@@ -10,12 +10,10 @@
   },
   "policy": {
     "accept_if_verified": true,
-    "name": "verified+url-required",
-    "require_verification_url": true
+    "name": "boolean-verification-to-decision",
+    "reject_if_not_verified": true
   },
   "reason": "verified=true",
   "subject": "stage284",
-  "verification": {
-    "url": "https://example.com/verify/stage284"
-  }
+  "verification_url": "https://mokkunsuzuki-code.github.io/stage284/"
 }

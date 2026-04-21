@@ -1,10 +1,10 @@
 {
-  "details": {
-    "identity": true,
-    "integrity": true,
-    "public_verification_url": true
-  },
+  "verified": true,
   "subject": "stage284",
-  "verification_url": "https://example.com/verify/stage284",
-  "verified": false
+  "verification_url": "https://mokkunsuzuki-code.github.io/stage284/",
+  "details": {
+    "integrity": true,
+    "identity": true,
+    "public_verification_url": true
+  }
 }
