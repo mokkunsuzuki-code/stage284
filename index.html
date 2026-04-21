@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stage284 Public Verification</title>
+  <title>QSP / VEP / Stage284</title>
   <style>
     :root{
-      --bg1:#07111f;
-      --bg2:#0b1730;
-      --panel:#101b33cc;
-      --panel2:#152445cc;
-      --line:#28406f;
-      --text:#eef4ff;
-      --muted:#9eb2d8;
-      --accent:#7cc7ff;
-      --accent2:#8b5cf6;
-      --good:#22c55e;
-      --bad:#ef4444;
-      --warn:#f59e0b;
-      --shadow:0 18px 48px rgba(0,0,0,.34);
+      --bg-top:#07101f;
+      --bg-bottom:#090f22;
+      --panel:rgba(17,25,53,.78);
+      --panel-strong:rgba(22,31,66,.92);
+      --line:#4c5cff88;
+      --line-soft:#6377ff44;
+      --text:#edf2ff;
+      --muted:#a7b2d9;
+      --good:#49f0b5;
+      --good-bg:rgba(73,240,181,.14);
+      --chip:#22346b;
+      --shadow:0 18px 42px rgba(0,0,0,.38);
       --radius:22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     }
 
     *{box-sizing:border-box}
@@ -27,427 +27,416 @@
     body{
       margin:0;
       color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Yu Gothic",sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",sans-serif;
       background:
-        radial-gradient(circle at 15% 0%, rgba(124,199,255,.16), transparent 26%),
-        radial-gradient(circle at 85% 10%, rgba(139,92,246,.16), transparent 24%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+        radial-gradient(circle at 20% 0%, rgba(86,114,255,.18), transparent 24%),
+        radial-gradient(circle at 80% 10%, rgba(144,92,255,.14), transparent 22%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
       min-height:100vh;
     }
 
-    .container{
-      max-width:1200px;
+    .wrap{
+      max-width:1000px;
       margin:0 auto;
-      padding:34px 18px 72px;
-    }
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:28px 26px 24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:auto -80px -80px auto;
-      width:220px;
-      height:220px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(124,199,255,.18), transparent 68%);
-      pointer-events:none;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(124,199,255,.28);
-      background:rgba(124,199,255,.08);
-      font-size:12px;
-      color:#d8e8ff;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    h1{
-      margin:14px 0 10px;
-      font-size:clamp(30px, 5vw, 52px);
-      line-height:1.08;
-      letter-spacing:-.02em;
-    }
-
-    .lead{
-      margin:0;
-      max-width:820px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.75;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.25fr .9fr;
-      gap:18px;
-      margin-top:24px;
-    }
-
-    .hero-card{
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-    }
-
-    .hero-label{
-      color:var(--muted);
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-
-    .decision-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:14px 20px;
-      border-radius:999px;
-      font-size:28px;
-      font-weight:800;
-      letter-spacing:.04em;
-      border:1px solid transparent;
-    }
-
-    .accept{
-      color:#ddffec;
-      background:rgba(34,197,94,.14);
-      border-color:rgba(34,197,94,.38);
-    }
-
-    .reject{
-      color:#ffe4e8;
-      background:rgba(239,68,68,.14);
-      border-color:rgba(239,68,68,.38);
-    }
-
-    .url-box{
-      display:block;
-      margin-top:8px;
-      padding:14px 16px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:#0a152d;
-      color:#bfe0ff;
-      word-break:break-all;
-      text-decoration:none;
-      font-weight:600;
-    }
-
-    .url-box:hover{ text-decoration:underline; }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:16px;
-      margin-top:20px;
-    }
-
-    .stat{
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
-      box-shadow:var(--shadow);
-    }
-
-    .stat-label{
-      color:var(--muted);
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      margin-bottom:8px;
-    }
-
-    .stat-value{
-      font-size:24px;
-      font-weight:800;
-      line-height:1.2;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12, 1fr);
-      gap:18px;
-      margin-top:22px;
+      padding:26px 18px 60px;
     }
 
     .card{
-      grid-column:span 12;
+      background:linear-gradient(180deg, rgba(22,31,66,.82), rgba(14,20,45,.88));
       border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
+      border-radius:var(--radius);
       box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
     }
 
-    .half{ grid-column:span 6; }
-
-    .card h2{
-      margin:0 0 16px;
-      font-size:19px;
-      letter-spacing:-.01em;
+    .hero{
+      padding:26px 22px 20px;
+      margin-bottom:14px;
     }
 
-    .rows{
+    .eyebrow{
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.04em;
+      color:#8fd1ff;
+      margin-bottom:10px;
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:20px;
+      line-height:1.2;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--text);
+      opacity:.92;
+      font-size:14px;
+      line-height:1.85;
+    }
+
+    .grid-2{
       display:grid;
-      gap:12px;
+      grid-template-columns:2fr 1fr;
+      gap:14px;
+      margin-bottom:14px;
     }
 
-    .row{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      padding:14px 16px;
-      border-radius:16px;
-      background:#0b1630;
-      border:1px solid #223961;
-      align-items:center;
+    .grid-2-eq{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-bottom:14px;
     }
 
-    .name{
-      color:#edf4ff;
-      font-size:15px;
+    .section{
+      padding:18px 18px 16px;
     }
 
-    .muted{ color:var(--muted); }
+    .section-title{
+      font-size:13px;
+      color:#dbe6ff;
+      font-weight:700;
+      margin-bottom:16px;
+    }
 
-    .pill{
+    .decision-pill{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:76px;
-      padding:7px 12px;
+      padding:8px 16px;
       border-radius:999px;
-      font-size:13px;
+      font-size:22px;
       font-weight:800;
-      border:1px solid transparent;
+      letter-spacing:.02em;
+      margin-bottom:14px;
+      color:#dffff2;
+      background:var(--good-bg);
+      border:1px solid rgba(73,240,181,.36);
+      box-shadow:0 0 18px rgba(73,240,181,.12) inset;
     }
 
-    .pill-true{
-      color:#dcfff0;
-      background:rgba(34,197,94,.14);
-      border-color:rgba(34,197,94,.36);
+    .decision-desc{
+      font-size:14px;
+      color:var(--text);
+      line-height:1.75;
+      margin-bottom:14px;
     }
 
-    .pill-false{
-      color:#ffe4e8;
-      background:rgba(239,68,68,.14);
-      border-color:rgba(239,68,68,.36);
+    .chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
 
-    .kv{
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #314d98, #243b79);
+      border:1px solid #6f8fff55;
+      color:#dbe7ff;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .link-list{
       display:grid;
-      grid-template-columns:180px 1fr;
-      gap:10px 16px;
+      gap:10px;
     }
 
-    .json{
-      margin:0;
-      padding:18px;
-      border-radius:18px;
-      background:#081121;
-      border:1px solid #223961;
-      overflow:auto;
-      font-size:13px;
-      line-height:1.7;
-      color:#d7e6ff;
-    }
-
-    .footer-note{
-      margin-top:12px;
+    .link-row .label{
       font-size:13px;
       color:var(--muted);
+      margin-bottom:4px;
     }
 
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns:1fr; }
-      .stats{ grid-template-columns:repeat(2,1fr); }
-      .half{ grid-column:span 12; }
+    .link-row a{
+      color:#b8e8ff;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:700;
+      word-break:break-all;
     }
 
-    @media (max-width: 640px){
-      .stats{ grid-template-columns:1fr; }
-      .kv{ grid-template-columns:1fr; }
-      .row{ flex-direction:column; align-items:flex-start; }
+    .link-row a:hover{
+      text-decoration:underline;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+    }
+
+    th, td{
+      padding:12px 4px;
+      border-bottom:1px solid var(--line-soft);
+    }
+
+    th{
+      text-align:left;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    td:last-child, th:last-child{
+      text-align:right;
+    }
+
+    .status-good{
+      color:#dffff2;
+      font-weight:800;
+    }
+
+    .mono-box{
+      background:rgba(17,24,51,.82);
+      border:1px solid var(--line-soft);
+      border-radius:16px;
+      padding:16px 18px;
+      overflow:auto;
+      font-family:var(--mono);
+      font-size:13px;
+      line-height:1.7;
+      color:#dce7ff;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .footer{
+      text-align:center;
+      color:#dfe8ff;
+      font-size:12px;
+      margin-top:18px;
+      opacity:.9;
+    }
+
+    @media (max-width: 840px){
+      .grid-2, .grid-2-eq{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <section class="hero">
-      <div class="eyebrow">QSP / VEP / Stage284</div>
-      <h1>Public Verification URL</h1>
-      <p class="lead">
-        Stage284 converts a verification result into a machine-readable protocol decision.
-        This page presents the decision result, verification conditions, and the public verification URL
-        in a reproducible, externally visible format.
+  <div class="wrap">
+    <section class="card hero">
+      <div class="eyebrow">QSP | VEP | STAGE284</div>
+      <h1>公開検証URL</h1>
+      <p>
+        Stage284は、検証結果をプロトコル上の最小判定レイヤーへ変換します。
+        第三者は、判定結果だけでなく、その判定に対応する公開検証URLも確認できます。
       </p>
-
-      <div class="hero-grid">
-        <div class="hero-card">
-          <div class="hero-label">Decision</div>
-          <div id="decisionBadge" class="decision-badge">Loading...</div>
-        </div>
-
-        <div class="hero-card">
-          <div class="hero-label">Verification URL</div>
-          <a id="verificationLink" class="url-box" href="#" target="_blank" rel="noopener noreferrer">Loading...</a>
-        </div>
-      </div>
-
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-label">Subject</div>
-          <div id="subjectValue" class="stat-value">-</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Reason</div>
-          <div id="reasonValue" class="stat-value">-</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Verified Input</div>
-          <div id="verifiedValue" class="stat-value">-</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Policy</div>
-          <div id="policyName" class="stat-value">-</div>
-        </div>
-      </div>
     </section>
 
-    <section class="grid">
-      <article class="card half">
-        <h2>Details</h2>
-        <div id="detailsList" class="rows"></div>
-      </article>
-
-      <article class="card half">
-        <h2>Policy Conditions</h2>
-        <div class="rows">
-          <div class="row">
-            <div class="name">accept_if_verified</div>
-            <div id="policyAccept">-</div>
-          </div>
-          <div class="row">
-            <div class="name">reject_if_not_verified</div>
-            <div id="policyReject">-</div>
-          </div>
-          <div class="row">
-            <div class="name">input.verified</div>
-            <div id="inputVerified">-</div>
-          </div>
+    <section class="grid-2">
+      <article class="card section">
+        <div class="section-title">最終決定</div>
+        <div id="decisionPill" class="decision-pill">受け入れる</div>
+        <div id="decisionDesc" class="decision-desc">
+          判定条件を満たしています。
+        </div>
+        <div class="chips">
+          <span class="chip">決定論的</span>
+          <span class="chip">verification_url 必須</span>
+          <span class="chip">public verification</span>
         </div>
       </article>
 
-      <article class="card">
-        <h2>Decision Output</h2>
-        <div class="kv">
-          <div class="muted">decision</div>
-          <div id="decisionText">-</div>
-
-          <div class="muted">subject</div>
-          <div id="subjectText">-</div>
-
-          <div class="muted">reason</div>
-          <div id="reasonText">-</div>
-
-          <div class="muted">verification_url</div>
-          <div id="verificationText">-</div>
+      <article class="card section">
+        <div class="section-title">検証リンク</div>
+        <div class="link-list">
+          <div class="link-row">
+            <div class="label">リポジトリ</div>
+            <a id="repoLink" href="https://github.com/mokkunsuzuki-code/stage284" target="_blank" rel="noopener noreferrer">
+              https://github.com/mokkunsuzuki-code/stage284
+            </a>
+          </div>
+          <div class="link-row">
+            <div class="label">行動</div>
+            <a id="actionsLink" href="https://github.com/mokkunsuzuki-code/stage284/actions" target="_blank" rel="noopener noreferrer">
+              最新の検証実行結果
+            </a>
+          </div>
+          <div class="link-row">
+            <div class="label">公開検証URL</div>
+            <a id="publicLink" href="https://mokkunsuzuki-code.github.io/stage284/" target="_blank" rel="noopener noreferrer">
+              https://mokkunsuzuki-code.github.io/stage284/
+            </a>
+          </div>
         </div>
-        <div class="footer-note">
-          This object is the deterministic Stage284 decision result exposed through the public verification page.
-        </div>
-      </article>
-
-      <article class="card">
-        <h2>Decision JSON</h2>
-        <pre id="jsonBox" class="json">Loading...</pre>
       </article>
     </section>
+
+    <section class="grid-2-eq">
+      <article class="card section">
+        <div class="section-title">信頼度スコア</div>
+        <table>
+          <tbody>
+            <tr>
+              <th>identity</th>
+              <td id="scoreIdentity">1</td>
+            </tr>
+            <tr>
+              <th>integrity</th>
+              <td id="scoreIntegrity">1</td>
+            </tr>
+            <tr>
+              <th>public verification</th>
+              <td id="scorePublicUrl">1</td>
+            </tr>
+            <tr>
+              <th>verified input</th>
+              <td id="scoreVerified">1</td>
+            </tr>
+            <tr>
+              <th>decision score</th>
+              <td id="scoreDecision">1</td>
+            </tr>
+            <tr>
+              <th>total trust</th>
+              <td id="scoreTotal">1.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card section">
+        <div class="section-title">判定ステータス</div>
+        <table>
+          <tbody>
+            <tr>
+              <th>decision</th>
+              <td id="statusDecision" class="status-good">受け入れる</td>
+            </tr>
+            <tr>
+              <th>subject</th>
+              <td id="statusSubject" class="status-good">stage284</td>
+            </tr>
+            <tr>
+              <th>verified</th>
+              <td id="statusVerified" class="status-good">確認済み</td>
+            </tr>
+            <tr>
+              <th>verification URL</th>
+              <td id="statusUrl" class="status-good">公開済み</td>
+            </tr>
+            <tr>
+              <th>policy</th>
+              <td id="statusPolicy" class="status-good">適用済み</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="card section" style="margin-bottom:14px;">
+      <div class="section-title">ワンコマンド外部確認</div>
+      <div id="verifyCommand" class="mono-box">loading...</div>
+    </section>
+
+    <section class="card section" style="margin-bottom:14px;">
+      <div class="section-title">意思決定成果物</div>
+      <div id="decisionJsonBox" class="mono-box">loading...</div>
+    </section>
+
+    <section class="card section">
+      <div class="section-title">公開鍵ではなく公開検証URL</div>
+      <div class="mono-box">Stage284 は、verified=true の表示を accept / reject の判定へ変換し、その結果を公開検証URLで第三者に提示します。</div>
+    </section>
+
+    <div class="footer">MIT ライセンス · Copyright (c) 2025 鈴木基弘</div>
   </div>
 
   <script>
-    function pill(value){
-      const cls = value ? 'pill pill-true' : 'pill pill-false';
-      const label = value ? 'true' : 'false';
-      return `<span class="${cls}">${label}</span>`;
+    function score(v){
+      return v ? 1 : 0;
     }
 
-    function setDecision(decision){
-      const el = document.getElementById('decisionBadge');
-      if(decision === 'accept'){
-        el.className = 'decision-badge accept';
-        el.textContent = 'ACCEPT';
-      } else {
-        el.className = 'decision-badge reject';
-        el.textContent = 'REJECT';
-      }
+    function jpDecision(decision){
+      return decision === 'accept' ? '受け入れる' : '拒否する';
+    }
+
+    function decisionReasonText(reason){
+      if(reason === 'verified=true') return '判定条件を満たしているため受け入れです。';
+      if(reason === 'verified=false') return 'verified が false のため拒否です。';
+      if(reason === 'missing verification_url') return '公開検証URLが無いため拒否です。';
+      return reason || '-';
     }
 
     fetch('out/decision/decision.json')
       .then(r => r.json())
       .then(data => {
-        const verificationUrl = data.verification_url || data.verification?.url || '-';
-
-        setDecision(data.decision);
-
-        document.getElementById('subjectValue').textContent = data.subject || '-';
-        document.getElementById('reasonValue').textContent = data.reason || '-';
-        document.getElementById('verifiedValue').innerHTML = pill(data.input?.verified === true);
-        document.getElementById('policyName').textContent = data.policy?.name || '-';
-
-        const link = document.getElementById('verificationLink');
-        link.textContent = verificationUrl;
-        if (verificationUrl !== '-') link.href = verificationUrl;
-
-        document.getElementById('policyAccept').innerHTML = pill(data.policy?.accept_if_verified === true);
-        document.getElementById('policyReject').innerHTML = pill(data.policy?.reject_if_not_verified === true);
-        document.getElementById('inputVerified').innerHTML = pill(data.input?.verified === true);
-
-        document.getElementById('decisionText').textContent = data.decision || '-';
-        document.getElementById('subjectText').textContent = data.subject || '-';
-        document.getElementById('reasonText').textContent = data.reason || '-';
-        document.getElementById('verificationText').innerHTML =
-          verificationUrl === '-' ? '-' : `<a href="${verificationUrl}" target="_blank" rel="noopener noreferrer">${verificationUrl}</a>`;
-
+        const decision = data.decision || 'reject';
         const details = data.details || {};
-        const detailsList = document.getElementById('detailsList');
-        if(Object.keys(details).length === 0){
-          detailsList.innerHTML = '<div class="row"><div class="name">No details</div></div>';
-        } else {
-          detailsList.innerHTML = Object.entries(details).map(([k,v]) => `
-            <div class="row">
-              <div class="name">${k}</div>
-              <div>${pill(v === true)}</div>
-            </div>
-          `).join('');
+        const verified = data.input && data.input.verified === true;
+        const verificationUrl = data.verification_url || data.verification?.url || 'https://mokkunsuzuki-code.github.io/stage284/';
+        const policyName = data.policy && data.policy.name ? data.policy.name : '-';
+
+        const identity = details.identity === true;
+        const integrity = details.integrity === true;
+        const publicUrl = details.public_verification_url === true || !!verificationUrl;
+        const decisionOk = decision === 'accept';
+
+        const scores = [
+          score(identity),
+          score(integrity),
+          score(publicUrl),
+          score(verified),
+          score(decisionOk)
+        ];
+        const total = (scores.reduce((a,b)=>a+b,0) / scores.length).toFixed(2);
+
+        const pill = document.getElementById('decisionPill');
+        pill.textContent = jpDecision(decision);
+        if(decision !== 'accept'){
+          pill.style.color = '#ffe7eb';
+          pill.style.background = 'rgba(239,68,68,.14)';
+          pill.style.borderColor = 'rgba(239,68,68,.36)';
         }
 
-        document.getElementById('jsonBox').textContent = JSON.stringify(data, null, 2);
+        document.getElementById('decisionDesc').textContent = decisionReasonText(data.reason);
+        document.getElementById('publicLink').href = verificationUrl;
+        document.getElementById('publicLink').textContent = verificationUrl;
+
+        document.getElementById('scoreIdentity').textContent = score(identity);
+        document.getElementById('scoreIntegrity').textContent = score(integrity);
+        document.getElementById('scorePublicUrl').textContent = score(publicUrl);
+        document.getElementById('scoreVerified').textContent = score(verified);
+        document.getElementById('scoreDecision').textContent = score(decisionOk);
+        document.getElementById('scoreTotal').textContent = total;
+
+        document.getElementById('statusDecision').textContent = jpDecision(decision);
+        document.getElementById('statusSubject').textContent = data.subject || '-';
+        document.getElementById('statusVerified').textContent = verified ? '確認済み' : '未確認';
+        document.getElementById('statusUrl').textContent = verificationUrl ? '公開済み' : '未公開';
+        document.getElementById('statusPolicy').textContent = policyName === '-' ? '未設定' : '適用済み';
+
+        const verifyCommand = [
+          'curl -L https://mokkunsuzuki-code.github.io/stage284/out/decision/decision.json -o decision.json',
+          'python3 - <<\'PY\'',
+          'import json',
+          'from pathlib import Path',
+          'data = json.loads(Path("decision.json").read_text(encoding="utf-8"))',
+          'print(json.dumps(data, ensure_ascii=False, indent=2))',
+          'print("decision =", data.get("decision"))',
+          'print("verification_url =", data.get("verification_url"))',
+          'PY'
+        ].join('\\n');
+
+        document.getElementById('verifyCommand').textContent = verifyCommand;
+        document.getElementById('decisionJsonBox').textContent = JSON.stringify(data, null, 2);
       })
       .catch(err => {
-        const el = document.getElementById('decisionBadge');
-        el.className = 'decision-badge reject';
-        el.textContent = 'LOAD ERROR';
-        document.getElementById('jsonBox').textContent = 'Failed to load decision.json: ' + err;
+        document.getElementById('decisionPill').textContent = '読み込み失敗';
+        document.getElementById('decisionPill').style.color = '#ffe7eb';
+        document.getElementById('decisionPill').style.background = 'rgba(239,68,68,.14)';
+        document.getElementById('decisionPill').style.borderColor = 'rgba(239,68,68,.36)';
+        document.getElementById('decisionDesc').textContent = 'decision.json の読み込みに失敗しました: ' + err;
+        document.getElementById('verifyCommand').textContent = 'Failed to load decision.json: ' + err;
+        document.getElementById('decisionJsonBox').textContent = 'Failed to load decision.json: ' + err;
       });
   </script>
 </body>
